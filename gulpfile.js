@@ -128,7 +128,7 @@ gulp.task('lint', function () {
     '!test/browser/**/*.js',
     'gulpfile.js'
   ])
-    .pipe($.eslint())
+	.pipe($.eslint({parserOptions: {ecmaVersion: 2015}}))
     .pipe($.eslint.format('stylish'))
     .pipe($.eslint.failAfterError());
 });
