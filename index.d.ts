@@ -1,13 +1,112 @@
+interface SwaggerObject {
+    "x-ms-paths"?: PathsObject
+    paths?: PathsObject
+    definitions?: DefinitionsObject
+    "x-ms-parameterized-host"?: {
+        parameters: ParameterObject[]
+    }
+    consumes?: string[]
+    produces?: string[]
+    parameters?: ParametersDefinitionsObject
+    responses?: ResponsesDefinitionsObject
+    readonly documents?: any
+}
+
+interface PathsObject {
+    [name: string]: PathItemObject
+}
+
+interface DefinitionsObject {
+    [name: string]: SchemaObject
+}
+
+interface ParameterObject {
+    name: string
+    in: string
+    schema?: SchemaObject
+    required?: boolean
+    items?: SchemaObject
+    type?: DataType
+}
+
+interface ParametersDefinitionsObject {
+    [name: string]: ParameterObject
+}
+
+interface ResponsesDefinitionsObject {
+    [name: string]: ResponseObject
+}
+
+interface PathItemObject extends PathItemObjectMethods {
+    parameters?: ParameterObject[]
+}
+
+interface SchemaObject {
+    type?: DataType
+    items?: SchemaObject
+    properties?: JsonSchemaProperties
+    additionalProperties?: SchemaObject|boolean
+    "x-nullable"?: boolean
+    in?: string
+    oneOf?: SchemaObject[]
+    $ref?: string
+    required?: string[]|false
+    schema?: SchemaObject
+    allOf?: SchemaObject[]
+    description?: string
+    discriminator?: string
+    "x-ms-discriminator-value"?: string
+    enum?: string[]
+    "x-ms-azure-resource"?: boolean
+    anyOf?: SchemaObject[]
+}
+
+type DataType = "integer"|"number"|"string"|"boolean"|"null"|"file"|"object"|"array"
+
+interface ResponseObject {
+    schema?: SchemaObject
+}
+
+type PathItemObjectMethods = {
+    [m in Methods]?: OperationObject
+}
+
+/**
+ * JSON Schema "properties"
+ */
+interface JsonSchemaProperties {
+    [name: string]: SchemaObject
+}
+
+type Methods = "get"|"put"|"post"|"delete"|"options"|"head"|"patch"
+
+interface OperationObject {
+    operationId?: string
+    parameters?: ParameterObject[]
+    consumes?: string[]
+    produces?: string[]
+    responses?: ResponsesObject
+}
+
+interface ResponsesObject {
+    default?: ResponseObject
+    [name: string]: ResponseObject|undefined
+}
+
+//
+
 export declare function create(options : Options) : Promise<SwaggerApi>
 
 declare interface Options {
-    defintion: Object | string
+    definition: SwaggerObject | string
     jsonRefs?: {
         readonly relativeBase: any
     }
     customValidatiors?: ValidatorCallback[]
     readonly isPathCaseSensitive?: boolean
 }
+
+//
 
 declare type ValidatorCallback = (api : SwaggerApi) => ValidationResults
 
