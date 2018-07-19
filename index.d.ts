@@ -237,6 +237,7 @@ declare interface Response {
     pathToDefinition: string[]
     ptr: string
     statusCode: string
+    readonly examples: any
 
     getExample(mimeType: string): string
     getSample(): Object
