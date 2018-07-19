@@ -128,7 +128,7 @@ declare class Path {
 
 declare interface Schema {
     readonly example: any
-    readonly format: any
+    format: any
 }
 
 declare class Parameter{
