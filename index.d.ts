@@ -44,7 +44,7 @@ declare class Operation{
     parameterObjects: Parameter[]
     ptr: string
     securityDefinitions: Object
-    
+
     getParameter(name : string, location ?: string) : Parameter
     getParameters() : Parameter[]
     getResponse(statusCode ?: number | string) : Response
@@ -110,7 +110,7 @@ declare class Path{
 
     getOperation(method : string): Operation[]
     getOperations(): Operation[]
-    getOperationsByTag(tag): Operation[]
+    getOperationsByTag(tag: any): Operation[]
     getParameters(): Parameter[]
 }
 
