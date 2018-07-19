@@ -238,6 +238,7 @@ declare interface Response {
     ptr: string
     statusCode: string
     readonly examples: any
+    readonly schema: any
 
     getExample(mimeType: string): string
     getSample(): Object
