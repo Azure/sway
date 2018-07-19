@@ -162,7 +162,7 @@ declare interface Operation {
     securityDefinitions: Object
 
     validateRequest(request : Request) : ValidationResults
-    validateResponse(response : Response) : ValidationResults
+    validateResponse(response : LiveResponse) : ValidationResults
     getParameters() : Parameter[]
     getResponses() : Response[]
     getResponse(statusCode ?: number | string) : Response
