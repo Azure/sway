@@ -195,6 +195,7 @@ declare interface SwaggerApi{
     readonly "x-ms-parameterized-host": XMsParameterizedHost
     readonly host: any
     readonly schemes: string[]
+    readonly basePath: any
 
     getOperation(pathOrRequest : string | Request, method ?: string): Operation
     getOperations(path ?: string): Operation[]
