@@ -1,9 +1,12 @@
 export declare function create(options : Options) : Promise<SwaggerApi>
 
-declare type Options = {
-    defintion: Object | string,
-    jsonRefs?: Object,
+declare interface Options {
+    defintion: Object | string
+    jsonRefs?: {
+        readonly relativeBase: any
+    }
     customValidatiors?: ValidatorCallback[]
+    readonly isPathCaseSensitive?: boolean
 }
 
 declare type ValidatorCallback = (api : SwaggerApi) => ValidationResults
