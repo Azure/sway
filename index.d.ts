@@ -133,7 +133,7 @@ declare class Parameter{
     pathObject: Path
     pathToDefinition: string[]
     ptr: string
-    schema: Object
+    schema: SchemaObject
     name: any
     format: any
     required: any
