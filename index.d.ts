@@ -193,6 +193,7 @@ declare interface SwaggerApi{
         readonly title: any
     }
     readonly "x-ms-parameterized-host": XMsParameterizedHost
+    readonly host: any
 
     getOperation(pathOrRequest : string | Request, method ?: string): Operation
     getOperations(path ?: string): Operation[]
