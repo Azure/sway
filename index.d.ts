@@ -189,6 +189,9 @@ declare interface SwaggerApi{
         readonly version: string
         readonly title: any
     }
+    readonly "x-ms-parameterized-host": {
+        parameters: ParameterObject[]
+    }
 
     getOperation(pathOrRequest : string | Request, method ?: string): Operation
     getOperations(path ?: string): Operation[]
