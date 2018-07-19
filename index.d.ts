@@ -104,7 +104,7 @@ declare interface Options {
 
 declare type ValidationResults = {
     errors: ValidationEntry[],
-    warnings: ValidationEntry[]
+    warnings?: ValidationEntry[]
 }
 
 declare class Path {
