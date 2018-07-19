@@ -222,7 +222,10 @@ declare type ValidationEntry = {
     schemaId: string
 }
 
-declare class Response{
+declare interface LiveResponse {
+}
+
+declare interface Response {
     definition: Object
     definitionFullyResolved: Object
     operationObject: Operation
@@ -232,7 +235,7 @@ declare class Response{
 
     getExample(mimeType: string): string
     getSample(): Object
-    validateResponse(response: Response): ValidationResults
+    validateResponse(response: LiveResponse): ValidationResults
 }
 
 declare class ParameterValue{
