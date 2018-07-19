@@ -126,6 +126,10 @@ declare class Path {
     getParameters(): Parameter[]
 }
 
+declare interface Schema {
+    readonly example: any
+}
+
 declare class Parameter{
     definition: Object
     definitionFullyResolved: Object
@@ -133,7 +137,7 @@ declare class Parameter{
     pathObject: Path
     pathToDefinition: string[]
     ptr: string
-    schema: SchemaObject
+    schema: Schema
     name: any
     format: any
     required: any
