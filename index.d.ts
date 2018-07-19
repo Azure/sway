@@ -2,9 +2,7 @@ interface SwaggerObject {
     "x-ms-paths"?: PathsObject
     paths?: PathsObject
     definitions?: DefinitionsObject
-    "x-ms-parameterized-host"?: {
-        parameters: ParameterObject[]
-    }
+    "x-ms-parameterized-host"?: XMsParameterizedHost
     consumes?: string[]
     produces?: string[]
     parameters?: ParametersDefinitionsObject
@@ -175,6 +173,11 @@ declare interface Operation {
     getSecurity() : Object//Security
 }
 
+declare interface XMsParameterizedHost {
+    parameters: ParameterObject[]
+    readonly hostTemplate: any
+}
+
 declare interface SwaggerApi{
     customValidators: ValidatorCallback[]
     definition: Object
@@ -189,9 +192,7 @@ declare interface SwaggerApi{
         readonly version: string
         readonly title: any
     }
-    readonly "x-ms-parameterized-host": {
-        parameters: ParameterObject[]
-    }
+    readonly "x-ms-parameterized-host": XMsParameterizedHost
 
     getOperation(pathOrRequest : string | Request, method ?: string): Operation
     getOperations(path ?: string): Operation[]
