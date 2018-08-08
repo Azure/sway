@@ -57,7 +57,7 @@ interface SchemaObject {
   enum?: string[]
   "x-ms-azure-resource"?: boolean
   anyOf?: SchemaObject[]
-  name?: string
+  title?: string
 }
 
 type DataType =
