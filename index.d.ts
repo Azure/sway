@@ -1,3 +1,5 @@
+import { JsonObject } from "@ts-common/json"
+
 interface SwaggerObject {
   "x-ms-paths"?: PathsObject
   paths?: PathsObject
@@ -39,7 +41,7 @@ interface PathItemObject extends PathItemObjectMethods {
   parameters?: ParameterObject[]
 }
 
-interface SchemaObject {
+interface SchemaObject extends JsonObject {
   type?: DataType
   items?: SchemaObject
   properties?: JsonSchemaProperties
