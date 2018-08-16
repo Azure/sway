@@ -1,4 +1,4 @@
-import { JsonObject } from "@ts-common/json"
+import { MutableStringMap } from "@ts-common/string-map";
 
 interface SwaggerObject {
   "x-ms-paths"?: PathsObject
@@ -12,13 +12,9 @@ interface SwaggerObject {
   readonly documents?: any
 }
 
-interface PathsObject {
-  [name: string]: PathItemObject
-}
+type PathsObject = MutableStringMap<PathItemObject>
 
-interface DefinitionsObject {
-  [name: string]: SchemaObject
-}
+type DefinitionsObject = MutableStringMap<SchemaObject>
 
 interface ParameterObject {
   name: string
@@ -29,19 +25,15 @@ interface ParameterObject {
   type?: DataType
 }
 
-interface ParametersDefinitionsObject {
-  [name: string]: ParameterObject
-}
+type ParametersDefinitionsObject = MutableStringMap<ParameterObject>
 
-interface ResponsesDefinitionsObject {
-  [name: string]: ResponseObject
-}
+type ResponsesDefinitionsObject = MutableStringMap<ResponseObject>
 
 interface PathItemObject extends PathItemObjectMethods {
   parameters?: ParameterObject[]
 }
 
-interface SchemaObject extends JsonObject {
+interface SchemaObject {
   type?: DataType
   items?: SchemaObject
   properties?: JsonSchemaProperties
@@ -82,7 +74,7 @@ type PathItemObjectMethods = { [m in Methods]?: OperationObject }
  * JSON Schema "properties"
  */
 interface JsonSchemaProperties {
-  [name: string]: SchemaObject
+  [name: string]: SchemaObject|undefined
 }
 
 type Methods = "get" | "put" | "post" | "delete" | "options" | "head" | "patch"
@@ -97,7 +89,7 @@ interface OperationObject {
 
 interface ResponsesObject {
   default?: ResponseObject
-  [name: string]: ResponseObject | undefined
+  [name: string]: ResponseObject|undefined
 }
 
 declare interface Options {
@@ -172,6 +164,7 @@ declare interface Operation {
   parameterObjects: Parameter[]
   ptr: string
   securityDefinitions: Object
+  readonly "x-ms-long-running-operation": any
 
   validateRequest(request: Request): ValidationResults
   validateResponse(response: LiveResponse): ValidationResults
