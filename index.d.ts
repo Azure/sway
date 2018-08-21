@@ -67,8 +67,10 @@ interface FileSchemaObject {
   readonly type: "file"
 }
 
+type ResponseSchemaObject = SchemaObject|FileSchemaObject
+
 interface ResponseObject {
-  schema?: SchemaObject|FileSchemaObject
+  schema?: ResponseSchemaObject
 }
 
 type PathItemObjectMethods = { [m in Methods]?: OperationObject }
