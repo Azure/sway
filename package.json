@@ -78,6 +78,6 @@
     "rewire": "^4.0.1",
     "swagger-methods": "^1.0.0",
     "swagger-schema-official": "2.0.0-bab6bed",
-    "z-schema": "sergey-shandar-forks/z-schema#sergey/json"
+    "z-schema": "github:sergey-shandar-forks/z-schema#sergey/json"
   }
 }
