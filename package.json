@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@ts-common/string-map": "^0.2.2",
-    "z-schema": "^3.24.1",
+    "@ts-common/z-schema": "^3.24.2",
     "debug": "^3.1.0",
     "faker": "^4.1.0",
     "js-base64": "^2.4.8",
