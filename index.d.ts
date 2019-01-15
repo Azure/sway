@@ -1,4 +1,5 @@
-import { MutableStringMap, StringMap } from "@ts-common/string-map";
+import { MutableStringMap, StringMap } from "@ts-common/string-map"
+import * as json from "@ts-common/json"
 
 // https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#info-object
 interface InfoObject {
@@ -10,7 +11,7 @@ interface InfoObject {
   readonly license?: unknown
 }
 
-interface SwaggerObject {
+type SwaggerObject = {
   readonly swagger: "2.0"
   readonly info: InfoObject
   "x-ms-paths"?: PathsObject
@@ -22,30 +23,30 @@ interface SwaggerObject {
   parameters?: ParametersDefinitionsObject
   responses?: ResponsesDefinitionsObject
   readonly documents?: any
-}
+} & json.EmptyObject
 
 type PathsObject = MutableStringMap<PathItemObject>
 
 type DefinitionsObject = MutableStringMap<SchemaObject>
 
-interface ParameterObject {
+type ParameterObject = {
   name: string
   in: string
   schema?: SchemaObject
   required?: boolean
   items?: SchemaObject
   type?: DataType
-}
+} & json.EmptyObject
 
 type ParametersDefinitionsObject = MutableStringMap<ParameterObject>
 
 type ResponsesDefinitionsObject = MutableStringMap<ResponseObject>
 
-interface PathItemObject extends PathItemObjectMethods {
+type PathItemObject = PathItemObjectMethods & {
   parameters?: ReadonlyArray<ParameterObject>
 }
 
-interface SchemaObject {
+type SchemaObject = {
   type?: DataType
   items?: SchemaObject
   properties?: JsonSchemaProperties
@@ -63,7 +64,7 @@ interface SchemaObject {
   "x-ms-azure-resource"?: boolean
   anyOf?: ReadonlyArray<SchemaObject>
   title?: string
-}
+} & json.EmptyObject
 
 type DataType =
   | "integer"
@@ -80,11 +81,11 @@ interface FileSchemaObject {
 
 type ResponseSchemaObject = SchemaObject|FileSchemaObject
 
-interface ResponseObject {
+type ResponseObject = {
   description: string
   schema?: ResponseSchemaObject
   examples?: ExampleObject
-}
+} & json.EmptyObject
 
 type ExampleObject = StringMap<unknown>
 
