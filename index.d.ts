@@ -150,7 +150,7 @@ declare interface Schema {
 }
 
 declare class Parameter {
-  definition: Object
+  definition: ParameterObject
   definitionFullyResolved: Object
   operationObject: Operation
   pathObject: Path
