@@ -1,6 +1,6 @@
 {
   "name": "yasway",
-  "version": "1.5.10",
+  "version": "1.5.12",
   "description": "A library that simplifies Swagger integrations.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -67,8 +67,8 @@
   },
   "dependencies": {
     "@ts-common/json": "^0.2.0",
-    "@ts-common/string-map": "^0.2.2",
-    "z-schema": "^3.24.2",
+    "@ts-common/string-map": "^0.2.3",
+    "z-schema": "^3.25.1",
     "debug": "^3.1.0",
     "faker": "^4.1.0",
     "js-base64": "^2.4.8",

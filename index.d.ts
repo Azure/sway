@@ -98,13 +98,13 @@ type JsonSchemaProperties = MutableStringMap<SchemaObject>
 
 type Methods = "get" | "put" | "post" | "delete" | "options" | "head" | "patch"
 
-interface OperationObject {
+type OperationObject = {
   operationId?: string
   parameters?: ReadonlyArray<ParameterObject>
   consumes?: string[]
   produces?: string[]
   responses: ResponsesObject
-}
+} & json.EmptyObject
 
 interface ResponsesObject {
   default?: ResponseObject
@@ -168,7 +168,7 @@ declare class Parameter {
   getValue(request: Request): ParameterValue
 }
 
-declare interface Operation {
+type Operation = {
   readonly operationId?: any
   method: string
   pathObject: Path
@@ -177,7 +177,7 @@ declare interface Operation {
   "x-ms-examples": any
   readonly consumes: string[]
   readonly produces: any
-  definition: Object
+  definition: OperationObject
   definitionFullyResolved: Object
   pathToDefinition: string[]
   parameterObjects: Parameter[]
