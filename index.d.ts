@@ -46,6 +46,11 @@ type PathItemObject = PathItemObjectMethods & {
   parameters?: ReadonlyArray<ParameterObject>
 }
 
+type XMsEnum = {
+  readonly name: string
+  readonly modelAsString?: boolean
+} & json.EmptyObject
+
 type SchemaObject = {
   type?: DataType
   items?: SchemaObject
@@ -64,6 +69,7 @@ type SchemaObject = {
   "x-ms-azure-resource"?: boolean
   anyOf?: ReadonlyArray<SchemaObject>
   title?: string
+  "x-ms-enum"?: XMsEnum
 } & json.EmptyObject
 
 type DataType =
