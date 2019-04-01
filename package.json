@@ -1,6 +1,6 @@
 {
   "name": "yasway",
-  "version": "1.5.14",
+  "version": "1.6.0",
   "description": "A library that simplifies Swagger integrations.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -13,18 +13,18 @@
     "swagger"
   ],
   "author": {
-    "name": "Amar Zavery",
-    "email": "amzavery@microsoft.com",
-    "url": "https://github.com/amarzavery"
+    "name": "Microsoft Corporation",
+    "email": "azsdkteam@microsoft.com",
+    "url": "https://github.com/Azure/sway"
   },
   "bugs": {
-    "url": "https://github.com/amarzavery/sway/issues"
+    "url": "https://github.com/Azure/sway/issues"
   },
-  "homepage": "https://github.com/amarzavery/sway",
+  "homepage": "https://github.com/Azure/sway",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/amarzavery/sway.git"
+    "url": "git://github.com/Azure/sway.git"
   },
   "files": [
     "index.js",
