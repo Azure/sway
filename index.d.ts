@@ -174,6 +174,10 @@ declare class Parameter {
   getValue(request: Request): ParameterValue
 }
 
+declare interface ValidateOptions {
+  readonly includeErrors?: string[]
+}
+
 type Operation = {
   readonly operationId?: any
   method: string
@@ -191,8 +195,8 @@ type Operation = {
   securityDefinitions: Object
   readonly "x-ms-long-running-operation": any
 
-  validateRequest(request: Request): ValidationResults
-  validateResponse(response: LiveResponse): ValidationResults
+  validateRequest(request: Request, options?: ValidateOptions): ValidationResults
+  validateResponse(response: LiveResponse, options?: ValidateOptions): ValidationResults
   getParameters(): Parameter[]
   getResponses(): Response[]
   getResponse(statusCode?: number | string): Response
