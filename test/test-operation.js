@@ -272,7 +272,7 @@ describe('Operation', function () {
             results = operation.validateRequest(request);
 
             assert.equal(results.warnings.length, 0);
-            assert.equal(results.errors.length, 1);
+            assert.equal(results.errors.length, 2);
           });
 
           it.skip('should handle an undefined value (defaults to application/octet-stream)', function () {
@@ -305,7 +305,7 @@ describe('Operation', function () {
             results = operation.validateRequest(request);
 
             assert.equal(results.warnings.length, 0);
-            assert.equal(results.errors.length, 0);
+            assert.equal(results.errors.length, 1);
           });
         });
 
