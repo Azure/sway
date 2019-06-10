@@ -1527,16 +1527,16 @@ describe('Parameter', function () {
         assert.ok(_.isUndefined(paramValue.error));
       });
 
-      it.skip('missing required value (without default)', function () {
-        var paramValue = swaggerApi.getOperation('/pet/findByTags', 'get').getParameter('tags').getValue({
-          query: {}
-        });
+      it('missing required value', function () {
+        var paramValue = swaggerApi.getOperation('/pet', 'post').getParameter('body').getValue({});
         var error = paramValue.error;
 
         assert.ok(_.isUndefined(paramValue.value));
+        assert.ok(_.isUndefined(error.path));
         assert.ok(paramValue.valid === false);
         assert.equal(error.message, 'Value is required but was not provided');
-        assert.equal(error.code, 'REQUIRED');
+        assert.equal(error.code, 'MISSING_REQUIRED_PARAMETER');
+        assert.equal(error.schemaPath, '#/paths/~1pet/post/parameters/0');
         assert.ok(error.failedValidation);
       });
 
