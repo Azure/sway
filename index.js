@@ -85,6 +85,7 @@ if (typeof Promise === 'undefined') {
  * @property {array} [params] - The parameters used when validation failed *(This is a z-schema construct and is only
  * set for JSON Schema validation errors.)*
  * @property {string[]} path - The path to the location in the document where the error/warning occurred
+ * @property {string} schemaPath - The path in the schema related to the error, e.g. in the case of missing required property
  * @property {string} [schemaId] - The schema id *(This is a z-schema construct and is only set for JSON Schema
  * validation errors and when its value is not `undefined`.)
  */

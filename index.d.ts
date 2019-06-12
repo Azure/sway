@@ -262,6 +262,7 @@ declare type ValidationEntry = {
   name: string
   params: Object[]
   path: string[]
+  schemaPath: string
   schemaId: string
 }
 

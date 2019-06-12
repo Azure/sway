@@ -431,13 +431,15 @@ describe('Operation', function () {
                 {
                   code: 'INVALID_TYPE',
                   message: 'Expected type integer but found type string',
-                  path: []
+                  path: [],
+                  schemaPath: ''
                 }
               ],
               in: 'path',
               message: 'Invalid parameter (petId): Expected type integer but found type string',
               name: 'petId',
-              path: []
+              path: [],
+              schemaPath: ''
             }
           ]);
         });
@@ -885,13 +887,15 @@ describe('Operation', function () {
                 {
                   code: 'INVALID_TYPE',
                   message: 'Expected type integer but found type string',
-                  path: []
+                  path: [],
+                  schemaPath: ''
                 }
               ],
               in: 'path',
               message: 'Invalid parameter (petId): Expected type integer but found type string',
               name: 'petId',
-              path: []
+              path: [],
+              schemaPath: ''
             }
           ]);
         });
