@@ -85,7 +85,7 @@ interface FileSchemaObject {
   readonly type: "file"
 }
 
-type ResponseSchemaObject = SchemaObject|FileSchemaObject
+type ResponseSchemaObject = SchemaObject | FileSchemaObject
 
 type ResponseObject = {
   description: string
@@ -114,7 +114,7 @@ type OperationObject = {
 
 interface ResponsesObject {
   default?: ResponseObject
-  [name: string]: ResponseObject|undefined
+  [name: string]: ResponseObject | undefined
 }
 
 declare interface Options {
@@ -176,6 +176,7 @@ declare class Parameter {
 
 declare interface ValidateOptions {
   readonly includeErrors?: string[]
+  isResponse?: boolean
 }
 
 type Operation = {
@@ -266,7 +267,7 @@ declare type ValidationEntry = {
   schemaId: string
 }
 
-declare interface LiveResponse {}
+declare interface LiveResponse { }
 
 declare interface Response {
   definition: Object
