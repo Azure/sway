@@ -1,5 +1,8 @@
 ## Release Notes
 
+### v1.8.4
+* Set path info in `invalid_request_parameter` error message when the internal error message doesn't have path info.
+
 ### TBD
 
 * Added support for registering custom format validators via `options.customFormats` when creating the `SwaggerApi`
