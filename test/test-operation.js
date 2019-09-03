@@ -438,7 +438,7 @@ describe('Operation', function () {
               in: 'path',
               message: 'Invalid parameter (petId): Expected type integer but found type string',
               name: 'petId',
-              path: [],
+              path: ['parameters', 'petId'],
               schemaPath: ''
             }
           ]);
@@ -894,7 +894,7 @@ describe('Operation', function () {
               in: 'path',
               message: 'Invalid parameter (petId): Expected type integer but found type string',
               name: 'petId',
-              path: [],
+              path: ['parameters', 'petId'],
               schemaPath: ''
             }
           ]);
