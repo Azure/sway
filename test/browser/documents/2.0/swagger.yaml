@@ -680,6 +680,18 @@ definitions:
         - "available"
         - "pending"
         - "sold"
+      secret:
+        type: "string"
+        x-ms-secret: ["secret"]
+      writeOnly:
+        type: "string"
+        x-ms-mutability: ["create", "update"]
+      createOnly:
+        type: "string"
+        x-ms-mutability: ["create"]
+      updateOnly:
+        type: "string"
+        x-ms-mutability: ["update"]
     type: "object"
     xml:
       name: "Pet"

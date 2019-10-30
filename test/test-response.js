@@ -129,6 +129,30 @@ describe('Response', function () {
       photoUrls: []
     };
 
+    var writeOnlyPet = {
+      name: 'Test Pet',
+      photoUrls: [],
+      writeOnly: 'writeonly'
+    };
+
+    var createOnlyPet = {
+      name: 'Test Pet',
+      photoUrls: [],
+      createOnly: 'createonly'
+    }
+
+    var updateOnlyPet = {
+      name: 'Test Pet',
+      photoUrls: [],
+      updateOnly: 'updateonly'
+    }
+
+    var secretPet = {
+      name: 'Test Pet',
+      photoUrls: [],
+      secret: 'password'
+    }
+
     describe('validate Content-Type', function () {
       describe('operation level produces', function () {
         var cSway;
@@ -617,6 +641,150 @@ describe('Response', function () {
                     }
                   ],
                   message: 'Invalid body: String is too short (2 chars), minimum 3',
+                  path: []
+                }
+              ]);
+              assert.equal(results.warnings.length, 0);
+            })
+            .then(done, done);
+        });
+
+        it('Test if response has secret property marked with x-ms-secret', function (done) {
+          var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
+
+          Sway.create({
+            definition: cSwaggerDoc
+          })
+            .then(function (api) {
+              var results = api.getOperation('/pet/{petId}', 'get').validateResponse({
+                body: secretPet,
+                encoding: 'utf-8',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                statusCode: 200
+              });
+
+              assert.deepEqual(results.errors, [
+                {
+                  code: 'INVALID_RESPONSE_BODY',
+                  errors: [
+                    {
+                      code: 'SECRET_PROPERTY',
+                      message: 'Secret property `"": "password"`, cannot be sent in the response.',
+                      params: ["", "password"],
+                      path: ["secret"]
+                    }
+                  ],
+                  message: 'Invalid body: Secret property `"": "password"`, cannot be sent in the response.',
+                  path: []
+                }
+              ]);
+              assert.equal(results.warnings.length, 0);
+            })
+            .then(done, done);
+        });
+
+        it('Test if response has WRITE only property marked with x-ms-mutability', function (done) {
+          var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
+
+          Sway.create({
+            definition: cSwaggerDoc
+          })
+            .then(function (api) {
+              var results = api.getOperation('/pet/{petId}', 'get').validateResponse({
+                body: writeOnlyPet,
+                encoding: 'utf-8',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                statusCode: 200
+              });
+
+              assert.deepEqual(results.errors, [
+                {
+                  code: 'INVALID_RESPONSE_BODY',
+                  errors: [
+                    {
+                      code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
+                      message: 'Write-only property `"": "writeonly"`, is not allowed in the response.',
+                      params: ["", "writeonly"],
+                      path: ["writeOnly"]
+                    }
+                  ],
+                  message: 'Invalid body: Write-only property `"": "writeonly"`, is not allowed in the response.',
+                  path: []
+                }
+              ]);
+              assert.equal(results.warnings.length, 0);
+            })
+            .then(done, done);
+        });
+
+        it('Test if response has CREATE only property marked with x-ms-mutability', function (done) {
+          var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
+
+          Sway.create({
+            definition: cSwaggerDoc
+          })
+            .then(function (api) {
+              var results = api.getOperation('/pet/{petId}', 'get').validateResponse({
+                body: createOnlyPet,
+                encoding: 'utf-8',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                statusCode: 200
+              });
+
+              assert.deepEqual(results.errors, [
+                {
+                  code: 'INVALID_RESPONSE_BODY',
+                  errors: [
+                    {
+                      code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
+                      message: 'Write-only property `"": "createonly"`, is not allowed in the response.',
+                      params: ["", "createonly"],
+                      path: ["createOnly"]
+                    }
+                  ],
+                  message: 'Invalid body: Write-only property `"": "createonly"`, is not allowed in the response.',
+                  path: []
+                }
+              ]);
+              assert.equal(results.warnings.length, 0);
+            })
+            .then(done, done);
+        });
+
+        it('Test if response has UPDATE only property marked with x-ms-mutability', function (done) {
+          var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
+
+          Sway.create({
+            definition: cSwaggerDoc
+          })
+            .then(function (api) {
+              var results = api.getOperation('/pet/{petId}', 'get').validateResponse({
+                body: updateOnlyPet,
+                encoding: 'utf-8',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                statusCode: 200
+              });
+
+              assert.deepEqual(results.errors, [
+                {
+                  code: 'INVALID_RESPONSE_BODY',
+                  errors: [
+                    {
+                      code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
+                      message: 'Write-only property `"": "updateonly"`, is not allowed in the response.',
+                      params: ["", "updateonly"],
+                      path: ["updateOnly"]
+                    }
+                  ],
+                  message: 'Invalid body: Write-only property `"": "updateonly"`, is not allowed in the response.',
                   path: []
                 }
               ]);
