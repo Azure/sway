@@ -672,8 +672,8 @@ describe('Response', function () {
                     {
                       code: 'SECRET_PROPERTY',
                       message: 'Secret property `"": "password"`, cannot be sent in the response.',
-                      params: ["", "password"],
-                      path: ["secret"]
+                      params: ['', 'password'],
+                      path: ['secret']
                     }
                   ],
                   message: 'Invalid body: Secret property `"": "password"`, cannot be sent in the response.',
@@ -708,8 +708,8 @@ describe('Response', function () {
                     {
                       code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
                       message: 'Write-only property `"": "writeonly"`, is not allowed in the response.',
-                      params: ["", "writeonly"],
-                      path: ["writeOnly"]
+                      params: ['', 'writeonly'],
+                      path: ['writeOnly']
                     }
                   ],
                   message: 'Invalid body: Write-only property `"": "writeonly"`, is not allowed in the response.',
@@ -744,8 +744,8 @@ describe('Response', function () {
                     {
                       code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
                       message: 'Write-only property `"": "createonly"`, is not allowed in the response.',
-                      params: ["", "createonly"],
-                      path: ["createOnly"]
+                      params: ['', 'createonly'],
+                      path: ['createOnly']
                     }
                   ],
                   message: 'Invalid body: Write-only property `"": "createonly"`, is not allowed in the response.',
@@ -780,8 +780,8 @@ describe('Response', function () {
                     {
                       code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
                       message: 'Write-only property `"": "updateonly"`, is not allowed in the response.',
-                      params: ["", "updateonly"],
-                      path: ["updateOnly"]
+                      params: ['', 'updateonly'],
+                      path: ['updateOnly']
                     }
                   ],
                   message: 'Invalid body: Write-only property `"": "updateonly"`, is not allowed in the response.',
