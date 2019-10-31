@@ -1,6 +1,6 @@
 {
   "name": "yasway",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "description": "A library that simplifies Swagger integrations.",
   "main": "index.js",
   "types": "index.d.ts",
