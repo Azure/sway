@@ -38,7 +38,6 @@ var glob = require('glob');
 var gulp = require('gulp');
 var KarmaServer = require('karma').Server;
 var path = require('path');
-var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 
 var runningAllTests = process.argv.indexOf('test-browser') === -1 && process.argv.indexOf('test-node') === -1;
@@ -165,10 +164,10 @@ gulp.task('test-node', function (done) {
           });
       });
     })
-    .then(done, done);
+  done();
 });
 
-gulp.task('test-browser', ['browserify'], function (done) {
+gulp.task('test-browser', gulp.series('browserify', (done) => {
   var basePath = './test/browser/';
 
   function cleanUp () {
@@ -248,12 +247,12 @@ gulp.task('test-browser', ['browserify'], function (done) {
     })
     .then(finisher, finisher)
     .then(done, done);
+}));
+
+gulp.task('test', gulp.series('test-node'), done => {
+  done();
 });
 
-gulp.task('test', function (done) {
-  runSequence('test-node', done);
-});
-
-gulp.task('default', function (done) {
-  runSequence('lint', 'test', 'docs', done);
+gulp.task('default', gulp.series('lint','test','docs'), done => {
+  done();
 });
