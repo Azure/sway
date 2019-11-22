@@ -682,10 +682,10 @@ definitions:
         - "sold"
       secret:
         type: "string"
-        x-ms-secret: ["true"]
+        x-ms-secret: "true"
       nonSecret:
         type: "string"
-        x-ms-secret: ["false"]
+        x-ms-secret: "false"
       writeOnly:
         type: "string"
         x-ms-mutability: ["create", "update"]
