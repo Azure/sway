@@ -153,6 +153,12 @@ describe('Response', function () {
       secret: 'password'
     }
 
+    var nonSecretPet = {
+      name: 'Test Pet',
+      photoUrls: [],
+      nonSecret: 'notAnySecret'
+    }
+
     describe('validate Content-Type', function () {
       describe('operation level produces', function () {
         var cSway;
@@ -649,7 +655,7 @@ describe('Response', function () {
             .then(done, done);
         });
 
-        it('Test if response has secret property marked with x-ms-secret', function (done) {
+        it('Test if response has secret property marked with x-ms-secret that equals to TRUE', function (done) {
           var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
 
           Sway.create({
@@ -684,6 +690,30 @@ describe('Response', function () {
             })
             .then(done, done);
         });
+
+        it('Test if response has secret property marked with x-ms-secret that equals to FALSE', function (done) {
+          var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
+
+          Sway.create({
+            definition: cSwaggerDoc
+          })
+            .then(function (api) {
+              var results = api.getOperation('/pet/{petId}', 'get').validateResponse({
+                body: nonSecretPet,
+                encoding: 'utf-8',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                statusCode: 200
+              });
+
+              // should not return any errors
+              assert.deepEqual(results.errors, []);
+              assert.equal(results.warnings.length, 0);
+            })
+            .then(done, done);
+        });
+
 
         it('Test if response has WRITE only property marked with x-ms-mutability', function (done) {
           var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
