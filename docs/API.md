@@ -13,16 +13,16 @@ A library for simpler [Swagger](http://swagger.io/) integrations.
             * [.getResponse([statusCode])](#module_Sway..Operation+getResponse) ⇒ <code>[Response](#module_Sway..Response)</code>
             * [.getResponses()](#module_Sway..Operation+getResponses) ⇒ <code>[Array.&lt;Response&gt;](#module_Sway..Response)</code>
             * [.getSecurity()](#module_Sway..Operation+getSecurity) ⇒ <code>Array.&lt;object&gt;</code>
-            * [.validateRequest(req)](#module_Sway..Operation+validateRequest) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
-            * [.validateResponse(res)](#module_Sway..Operation+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+            * [.validateRequest(req, options)](#module_Sway..Operation+validateRequest) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+            * [.validateResponse(res, options)](#module_Sway..Operation+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
         * [~Parameter](#module_Sway..Parameter)
             * [new Parameter(opOrPathObject, definition, definitionFullyResolved, pathToDefinition)](#new_module_Sway..Parameter_new)
             * [.getSample()](#module_Sway..Parameter+getSample) ⇒ <code>\*</code>
-            * [.getValue(req)](#module_Sway..Parameter+getValue) ⇒ <code>[ParameterValue](#module_Sway..ParameterValue)</code>
+            * [.getValue(req, validateOptions)](#module_Sway..Parameter+getValue) ⇒ <code>[ParameterValue](#module_Sway..ParameterValue)</code>
         * [~ParameterValue](#module_Sway..ParameterValue)
-            * [new ParameterValue(parameterObject, raw)](#new_module_Sway..ParameterValue_new)
+            * [new ParameterValue(parameterObject, raw, validateOptions)](#new_module_Sway..ParameterValue_new)
         * [~Path](#module_Sway..Path)
-            * [new Path(api, path, definition, definitionFullyResolved, pathToDefinition, isCaseSensitive)](#new_module_Sway..Path_new)
+            * [new Path(api, path, definition, definitionFullyResolved, pathToDefinition, isCaseSensitive, specPath)](#new_module_Sway..Path_new)
             * [.getOperation(idOrMethod)](#module_Sway..Path+getOperation) ⇒ <code>[Array.&lt;Operation&gt;](#module_Sway..Operation)</code>
             * [.getOperations()](#module_Sway..Path+getOperations) ⇒ <code>[Array.&lt;Operation&gt;](#module_Sway..Operation)</code>
             * [.getOperationsByTag(tag)](#module_Sway..Path+getOperationsByTag) ⇒ <code>[Array.&lt;Operation&gt;](#module_Sway..Operation)</code>
@@ -31,7 +31,7 @@ A library for simpler [Swagger](http://swagger.io/) integrations.
             * [new Response(operationObject, statusCode, definition, definitionFullyResolved, pathToDefinition)](#new_module_Sway..Response_new)
             * [.getExample([mimeType])](#module_Sway..Response+getExample) ⇒ <code>string</code>
             * [.getSample()](#module_Sway..Response+getSample) ⇒ <code>\*</code>
-            * [.validateResponse(res)](#module_Sway..Response+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+            * [.validateResponse(res, options)](#module_Sway..Response+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
         * [~ServerResponseWrapper](#module_Sway..ServerResponseWrapper) : <code>object</code>
         * [~SwaggerApi](#module_Sway..SwaggerApi)
             * [new SwaggerApi(definition, definitionRemotesResolved, definitionFullyResolved, references, options)](#new_module_Sway..SwaggerApi_new)
@@ -75,8 +75,8 @@ A library for simpler [Swagger](http://swagger.io/) integrations.
     * [.getResponse([statusCode])](#module_Sway..Operation+getResponse) ⇒ <code>[Response](#module_Sway..Response)</code>
     * [.getResponses()](#module_Sway..Operation+getResponses) ⇒ <code>[Array.&lt;Response&gt;](#module_Sway..Response)</code>
     * [.getSecurity()](#module_Sway..Operation+getSecurity) ⇒ <code>Array.&lt;object&gt;</code>
-    * [.validateRequest(req)](#module_Sway..Operation+validateRequest) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
-    * [.validateResponse(res)](#module_Sway..Operation+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+    * [.validateRequest(req, options)](#module_Sway..Operation+validateRequest) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+    * [.validateResponse(res, options)](#module_Sway..Operation+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
 
 <a name="new_module_Sway..Operation_new"></a>
 
@@ -150,7 +150,7 @@ is undefined.
 **Returns**: <code>Array.&lt;object&gt;</code> - The security for this operation  
 <a name="module_Sway..Operation+validateRequest"></a>
 
-#### operation.validateRequest(req) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+#### operation.validateRequest(req, options) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
 Validates the request.
 
 **Note:** Below is the list of `req` properties used *(req should be an `http.ClientRequest` or equivalent)*:
@@ -173,10 +173,11 @@ For `path` parameters, we will use the operation's `regexp` property to parse ou
 | Param | Type | Description |
 | --- | --- | --- |
 | req | <code>object</code> | The http client request *(or equivalent)* |
+| options | <code>object</code> | The options passed for the validation |
 
 <a name="module_Sway..Operation+validateResponse"></a>
 
-#### operation.validateResponse(res) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+#### operation.validateResponse(res, options) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
 Validates the response.
 
 **Kind**: instance method of <code>[Operation](#module_Sway..Operation)</code>  
@@ -185,6 +186,7 @@ Validates the response.
 | Param | Type | Description |
 | --- | --- | --- |
 | res | <code>[ServerResponseWrapper](#module_Sway..ServerResponseWrapper)</code> | The response or response like object |
+| options | <code>module:Sway~ValidateOptions</code> | The options passed for the validation |
 
 <a name="module_Sway..Parameter"></a>
 
@@ -206,7 +208,7 @@ Validates the response.
 * [~Parameter](#module_Sway..Parameter)
     * [new Parameter(opOrPathObject, definition, definitionFullyResolved, pathToDefinition)](#new_module_Sway..Parameter_new)
     * [.getSample()](#module_Sway..Parameter+getSample) ⇒ <code>\*</code>
-    * [.getValue(req)](#module_Sway..Parameter+getValue) ⇒ <code>[ParameterValue](#module_Sway..ParameterValue)</code>
+    * [.getValue(req, validateOptions)](#module_Sway..Parameter+getValue) ⇒ <code>[ParameterValue](#module_Sway..ParameterValue)</code>
 
 <a name="new_module_Sway..Parameter_new"></a>
 
@@ -235,7 +237,7 @@ Returns a sample value for the parameter based on its schema;
 **Returns**: <code>\*</code> - The sample value  
 <a name="module_Sway..Parameter+getValue"></a>
 
-#### parameter.getValue(req) ⇒ <code>[ParameterValue](#module_Sway..ParameterValue)</code>
+#### parameter.getValue(req, validateOptions) ⇒ <code>[ParameterValue](#module_Sway..ParameterValue)</code>
 Returns the parameter value from the request.
 
 **Note:** Below is the list of `req` properties used *(req should be an `http.ClientRequest` or equivalent)*:
@@ -262,6 +264,7 @@ For `path` parameters, we will use the operation's `regexp` property to parse ou
 | Param | Type | Description |
 | --- | --- | --- |
 | req | <code>object</code> | The http client request *(or equivalent)* |
+| validateOptions | <code>object</code> | The options passed for the validation |
 
 <a name="module_Sway..ParameterValue"></a>
 
@@ -279,7 +282,7 @@ For `path` parameters, we will use the operation's `regexp` property to parse ou
 
 <a name="new_module_Sway..ParameterValue_new"></a>
 
-#### new ParameterValue(parameterObject, raw)
+#### new ParameterValue(parameterObject, raw, validateOptions)
 Object representing a parameter value.
 
 **Note:** Do not use directly.
@@ -289,6 +292,7 @@ Object representing a parameter value.
 | --- | --- | --- |
 | parameterObject | <code>[Parameter](#module_Sway..Parameter)</code> | The `Parameter` object |
 | raw | <code>\*</code> | The original/raw value |
+| validateOptions | <code>\*</code> | The options for the validations passed in. |
 
 <a name="module_Sway..Path"></a>
 
@@ -307,10 +311,11 @@ Object representing a parameter value.
 | pathToDefinition | <code>Array.&lt;string&gt;</code> | The path segments to the path definition |
 | ptr | <code>ptr</code> | The JSON Pointer to the path |
 | regexp | <code>regexp</code> | The `RegExp` used to match request paths against this path |
+| specPath | <code>string</code> | The path of the swagger spec |
 
 
 * [~Path](#module_Sway..Path)
-    * [new Path(api, path, definition, definitionFullyResolved, pathToDefinition, isCaseSensitive)](#new_module_Sway..Path_new)
+    * [new Path(api, path, definition, definitionFullyResolved, pathToDefinition, isCaseSensitive, specPath)](#new_module_Sway..Path_new)
     * [.getOperation(idOrMethod)](#module_Sway..Path+getOperation) ⇒ <code>[Array.&lt;Operation&gt;](#module_Sway..Operation)</code>
     * [.getOperations()](#module_Sway..Path+getOperations) ⇒ <code>[Array.&lt;Operation&gt;](#module_Sway..Operation)</code>
     * [.getOperationsByTag(tag)](#module_Sway..Path+getOperationsByTag) ⇒ <code>[Array.&lt;Operation&gt;](#module_Sway..Operation)</code>
@@ -318,7 +323,7 @@ Object representing a parameter value.
 
 <a name="new_module_Sway..Path_new"></a>
 
-#### new Path(api, path, definition, definitionFullyResolved, pathToDefinition, isCaseSensitive)
+#### new Path(api, path, definition, definitionFullyResolved, pathToDefinition, isCaseSensitive, specPath)
 The Path object.**Note:** Do not use directly.**Extra Properties:** Other than the documented properties, this object also exposes all properties of the                      definition object.
 
 
@@ -330,6 +335,7 @@ The Path object.**Note:** Do not use directly.**Extra Properties:** Other th
 | definitionFullyResolved | <code>object</code> | The path definition with all of its resolvable references resolved |
 | pathToDefinition | <code>Array.&lt;string&gt;</code> | The path segments to the path definition |
 | isCaseSensitive | <code>Array.&lt;string&gt;</code> | Specifies if to consider the path case sensitive or not |
+| specPath | <code>string</code> | The path of the swagger spec |
 
 <a name="module_Sway..Path+getOperation"></a>
 
@@ -389,7 +395,7 @@ Return the parameters for this path.
     * [new Response(operationObject, statusCode, definition, definitionFullyResolved, pathToDefinition)](#new_module_Sway..Response_new)
     * [.getExample([mimeType])](#module_Sway..Response+getExample) ⇒ <code>string</code>
     * [.getSample()](#module_Sway..Response+getSample) ⇒ <code>\*</code>
-    * [.validateResponse(res)](#module_Sway..Response+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+    * [.validateResponse(res, options)](#module_Sway..Response+validateResponse) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
 
 <a name="new_module_Sway..Response_new"></a>
 
@@ -431,7 +437,7 @@ Returns a sample value.
 **Returns**: <code>\*</code> - The sample value for the response, which can be undefined if the response schema is not provided  
 <a name="module_Sway..Response+validateResponse"></a>
 
-#### response.validateResponse(res) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
+#### response.validateResponse(res, options) ⇒ <code>[ValidationResults](#module_Sway..ValidationResults)</code>
 Validates the response.
 
 **Kind**: instance method of <code>[Response](#module_Sway..Response)</code>  
@@ -440,6 +446,7 @@ Validates the response.
 | Param | Type | Description |
 | --- | --- | --- |
 | res | <code>[ServerResponseWrapper](#module_Sway..ServerResponseWrapper)</code> | The response or response like object |
+| options | <code>module:Sway~ValidateOptions</code> | The options passed for validation |
 
 <a name="module_Sway..ServerResponseWrapper"></a>
 
@@ -638,6 +645,7 @@ documented below.
 | name | <code>string</code> | The header name for header validation errors |
 | params | <code>array</code> | The parameters used when validation failed *(This is a z-schema construct and is only set for JSON Schema validation errors.)* |
 | path | <code>Array.&lt;string&gt;</code> | The path to the location in the document where the error/warning occurred |
+| schemaPath | <code>string</code> | The path in the schema related to the error, e.g. in the case of missing required property |
 | schemaId | <code>string</code> | The schema id *(This is a z-schema construct and is only set for JSON Schema validation errors and when its value is not `undefined`.) |
 
 <a name="module_Sway..ValidationResults"></a>
