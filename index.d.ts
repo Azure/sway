@@ -143,6 +143,7 @@ declare class Path {
 
   pathToDefinition: string[]
   ptr: string
+  specPath: string
 
   getOperation(method: string): Operation[]
   getOperations(): Operation[]
