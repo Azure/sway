@@ -13,5 +13,4 @@ typings/
 jsconfig.json
 .vs
 
-package-lock.json
 *.tgz
