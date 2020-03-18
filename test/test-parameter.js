@@ -519,7 +519,7 @@ describe('Parameter', function () {
         }
       });
 
-      describe('path parameter name', function(){
+      describe('path parameter name', function () {
         var parameter;
 
         before(function () {
@@ -532,7 +532,7 @@ describe('Parameter', function () {
              url: '/v2/pet/dash/family'
           });
   
-          assert.equal(paramValue.value, "family");
+          assert.equal(paramValue.value, 'family');
           assert.ok(paramValue.valid);
         });
       });
