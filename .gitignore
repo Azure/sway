@@ -5,7 +5,6 @@ bower_components/
 coverage/
 typings/
 .settings/
-.vscode/
 
 .projectile
 .tern-project
@@ -13,5 +12,4 @@ typings/
 jsconfig.json
 .vs
 
-package-lock.json
 *.tgz

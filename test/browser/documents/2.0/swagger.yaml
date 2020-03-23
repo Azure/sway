@@ -695,6 +695,9 @@ definitions:
       updateOnly:
         type: "string"
         x-ms-mutability: ["update"]
+      readOnlyProperty:
+        type: "string"
+        x-ms-mutability: ["read"]
     type: "object"
     xml:
       name: "Pet"

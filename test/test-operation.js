@@ -761,6 +761,35 @@ describe('Operation', function () {
             assert.equal(results.warnings.length, 0);
             assert.equal(results.errors.length, 0);
           });
+
+          it('should return an error for a readonly value in the request', function () {
+            var request = {
+              url: '/pet',
+              body: {
+                name: 'Test Pet',
+                photoUrls: [],
+                readOnlyProperty: 'readonly property'
+              }
+            };
+
+            request.headers = {
+              'content-type': 'application/json'
+            };
+            
+            var results = operation.validateRequest(request);
+  
+            assert.equal(results.warnings.length, 0);
+            assert.equal(results.errors.length, 1);
+            assert.deepEqual(results.errors[0].errors, [
+                  {
+                    code: 'READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST',
+                    message: 'ReadOnly property `"": "readonly property"`, cannot be sent in the request.',
+                    params: ['', 'readonly property'],
+                    path: ['readOnlyProperty']
+                  }
+                ]
+            );
+          });
         });
 
         // We only need one test to make sure that we're using the global consumes
