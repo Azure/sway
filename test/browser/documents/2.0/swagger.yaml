@@ -256,6 +256,33 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/ApiResponse"
+  /pet/dash/{user-name}:
+      get:
+        tags:
+        - "user"
+        summary: "Get user by user name"
+        description: ""
+        operationId: "getNameWithDash"
+        produces:
+        - "application/xml"
+        - "application/json"
+        parameters:
+        - name: "user-name"
+          in: "path"
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: "string"
+        responses:
+          200:
+            description: "successful operation"
+            schema:
+              $ref: "#/definitions/User"
+          400:
+            description: "Invalid username supplied"
+          404:
+            description: "User not found"
+        security:
+          - api_key: []
   /store/inventory:
     get:
       tags:

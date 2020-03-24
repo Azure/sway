@@ -518,6 +518,24 @@ describe('Parameter', function () {
           assert.equal(err.message, 'req is required');
         }
       });
+
+      describe('path parameter name', function () {
+        var parameter;
+
+        before(function () {
+          parameter = swaggerApi.getOperation('/pet/dash/{user-name}', 'get').getParameter('user-name');
+        });
+
+        it('include dash', function () {
+          
+          var paramValue = parameter.getValue({
+             url: '/v2/pet/dash/family'
+          });
+  
+          assert.equal(paramValue.value, 'family');
+          assert.ok(paramValue.valid);
+        });
+      });
     });
 
     describe('processed values', function () {
