@@ -715,6 +715,49 @@ describe('Operation', function () {
             operation = swaggerApi.getOperation('/pet', 'post');
           });
 
+          it('body parameter with schema', function (done) {
+            var cSwagger2 = _.cloneDeep(helpers.swaggerDoc);
+
+            cSwagger2.parameters = {
+              petInfoParam: {
+                  in: 'body',
+                name: 'petInfo',
+                required: true,
+                schema: {
+                  $ref: '#/definitions/Pet'
+                }
+              }
+            };
+
+            cSwagger2.paths['/user/createWithList'].post.parameters = [
+              {
+                $ref: '#/parameters/petInfoParam'
+              }
+            ];
+            Sway.create({
+              definition: cSwagger2
+            })
+            .then(function (api) {
+              var operation1 = api.getOperation('/user/createWithList', 'post');
+              var results = operation1.validateRequest({
+                url: '/v2/user/createWithList',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                body: {
+                  petType: 'dog'
+                }
+              });
+
+              assert.equal(results.warnings.length, 0);
+              assert.equal(results.errors.length, 1);
+              assert.equal(results.errors[0].errors.length, 2);
+              assert.equal(results.errors[0].errors[0].code, 'OBJECT_MISSING_REQUIRED_PROPERTY');
+              assert.equal(results.errors[0].errors[1].code, 'OBJECT_MISSING_REQUIRED_PROPERTY');
+            })
+            .then(done, done);
+          });
+
           it('should return an error for an unsupported value', function () {
             var request = _.cloneDeep(baseRequest);
             var results;
