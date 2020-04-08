@@ -11,5 +11,6 @@ typings/
 .DS_Store
 jsconfig.json
 .vs
+.nyc_output
 
 *.tgz

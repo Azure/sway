@@ -5,7 +5,8 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "gulp"
+    "test": "gulp",
+    "test-with-coverage": "nyc mocha"
   },
   "keywords": [
     "api",
@@ -68,7 +69,6 @@
   "dependencies": {
     "@ts-common/json": "^0.3.0",
     "@ts-common/string-map": "^0.3.0",
-    "z-schema": "^4.2.2",
     "clone-deep": "^4.0.1",
     "debug": "^4.1.1",
     "faker": "^4.1.0",
@@ -78,8 +78,10 @@
     "json-schema-faker": "^0.5.0-rc16",
     "lodash": "^4.17.11",
     "native-promise-only": "^0.8.1",
+    "nyc": "^15.0.1",
     "path-to-regexp": "^1.7.0",
     "swagger-methods": "^1.0.8",
-    "swagger-schema-official": "2.0.0-bab6bed"
+    "swagger-schema-official": "2.0.0-bab6bed",
+    "z-schema": "^4.2.2"
   }
 }
