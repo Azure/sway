@@ -344,20 +344,20 @@ describe('Response', function () {
               {
                 code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
                 message: 'Write-only property `"toy": `, is not allowed in the response.',
-                params: ["toy", []],
-                path: ["photoUrls"],
-                title: "{\"path\":[\"toy\"]}"
+                params: ['toy', []],
+                path: ['photoUrls'],
+                title: '{\"path\":[\"toy\"]}'
               }, {
                 code: 'SECRET_PROPERTY',
                 message: 'Secret property `"toy": `, cannot be sent in the response.',
-                params: ["toy", []],
-                path: ["photoUrls"],
-                title: "{\"path\":[\"toy\"]}"
+                params: ['toy', []],
+                path: ['photoUrls'],
+                title: '{\"path\":[\"toy\"]}'
               }, {
                 code: 'SECRET_PROPERTY',
                 message: 'Secret property `"": "Test Toy"`, cannot be sent in the response.',
-                params: ["", "Test Toy"],
-                path: ["name"],
+                params: ['', 'Test Toy'],
+                path: ['name'],
               },
             ]);
           })

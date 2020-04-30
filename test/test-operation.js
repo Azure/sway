@@ -886,7 +886,7 @@ describe('Operation', function () {
                 params: ['toy', 'readonly property'],
                 message: 'ReadOnly property `\"toy\": \"readonly property\"`, cannot be sent in the request.',
                 path: ['readOnlyProperty'],
-                title: "{\"path\":[\"toy\"]}"
+                title: '{\"path\":[\"toy\"]}'
               });
           });
 
@@ -934,9 +934,9 @@ describe('Operation', function () {
           assert.deepEqual(results.errors[0].errors[0],
             {
               code: 'READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST',
-              params: ["", "12"],
+              params: ['','12'],
               message: 'ReadOnly property `\"\": 12`, cannot be sent in the request.',
-              path: ["age"],
+              path: ['age'],
             });
         });
 
@@ -962,9 +962,9 @@ describe('Operation', function () {
           assert.deepEqual(results.errors[0].errors[0],
             {
               code: 'INVALID_TYPE',
-              params: ["number", "not-a-number"],
+              params: ['number','not-a-number'],
               message: 'Expected type number but found type not-a-number',
-              path: ["age"],
+              path: ['age'],
             });
         });
 
@@ -990,10 +990,10 @@ describe('Operation', function () {
           assert.deepEqual(results.errors[0].errors[0],
             {
               code: 'READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST',
-              params: ["toy","price"],
+              params: ['toy','price'],
               message: 'ReadOnly property `\"toy\": \"price\"`, cannot be sent in the request.',
-              path: ["price"],
-              title: "{\"path\":[\"toy\"]}"
+              path: ['price'],
+              title: '{\"path\":[\"toy\"]}'
             });
         });
       });
