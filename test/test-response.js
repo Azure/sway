@@ -129,6 +129,12 @@ describe('Response', function () {
       photoUrls: []
     };
 
+    var validToy = {
+      name: 'Test Toy',
+      photoUrls: [],
+      age: 12,
+    };
+
     var writeOnlyPet = {
       name: 'Test Pet',
       photoUrls: [],
@@ -309,6 +315,54 @@ describe('Response', function () {
       });
 
       // We only need one test to make sure that we're using the global produces
+
+      it('should not return errors for WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE and SECRET_PROPERTY', function (done) {
+        
+        var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);
+
+        cSwaggerDoc.produces = [
+          'application/json',
+          'application/xml'
+        ];
+
+        delete cSwaggerDoc.paths['/toy/{toyId}'].get.produces;
+
+        Sway.create({
+          definition: cSwaggerDoc
+        })
+          .then(function (api) {
+            var results = api.getOperation('/toy/{toyId}', 'get').validateResponse({
+              body: validToy,
+              headers: {
+                'content-type': 'application/json'
+              },
+              statusCode: 200
+            });
+
+            assert.equal(results.warnings.length, 0);
+            assert.deepEqual(results.errors[0].errors, [
+              {
+                code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
+                message: 'Write-only property `"toy": `, is not allowed in the response.',
+                params: ["toy", []],
+                path: ["photoUrls"],
+                title: "{\"path\":[\"toy\"]}"
+              }, {
+                code: 'SECRET_PROPERTY',
+                message: 'Secret property `"toy": `, cannot be sent in the response.',
+                params: ["toy", []],
+                path: ["photoUrls"],
+                title: "{\"path\":[\"toy\"]}"
+              }, {
+                code: 'SECRET_PROPERTY',
+                message: 'Secret property `"": "Test Toy"`, cannot be sent in the response.',
+                params: ["", "Test Toy"],
+                path: ["name"],
+              },
+            ]);
+          })
+          .then(done, done);
+      });
 
       it('should handle global level produces', function (done) {
         var cSwaggerDoc = _.cloneDeep(helpers.swaggerDoc);

@@ -833,7 +833,170 @@ describe('Operation', function () {
                 ]
             );
           });
+
+          it('should return an error for expected type string but found type object', function () {
+            var request = {
+              url: '/pet',
+              body: {
+                name: 'Test Pet',
+                photoUrls: [],
+                readOnlyProperty: {}
+              }
+            };
+
+            request.headers = {
+              'content-type': 'application/json'
+            };
+            
+            var results = operation.validateRequest(request);
+  
+            assert.equal(results.warnings.length, 0);
+            assert.equal(results.errors.length, 1);
+            assert.deepEqual(results.errors[0].errors[0], {
+                code: 'INVALID_TYPE',
+                message: 'Expected type string but found type object',
+                params: ['string', 'object'],
+                path: ['readOnlyProperty']
+              }
+            );
+          });
+
+          it('should return an error for readOnly property "toy": "readonly property", cannot be sent in the request.', function () {
+            var myOperation = swaggerApi.getOperation('/toy', 'post');
+
+            var request = {
+              url: '/toy',
+              body: {
+                name: 'Test toy',
+                photoUrls: [],
+                readOnlyProperty: 'readonly property'
+              }
+            };
+
+            request.headers = {
+              'content-type': 'application/json'
+            };
+            
+            var results = myOperation.validateRequest(request);
+  
+            assert.equal(results.warnings.length, 0);
+            assert.equal(results.errors.length, 1);
+            assert.deepEqual(results.errors[0].errors[0], {
+                code: 'READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST',
+                params: ['toy', 'readonly property'],
+                message: 'ReadOnly property `\"toy\": \"readonly property\"`, cannot be sent in the request.',
+                path: ['readOnlyProperty'],
+                title: "{\"path\":[\"toy\"]}"
+              });
+          });
+
+          it('should return 0 warnings 0 errors', function () {
+            var myOperation = swaggerApi.getOperation('/toy', 'post');
+
+            var request = {
+              url: '/toy',
+              body: {
+                name: 'Test toy',
+                photoUrls: [],
+                secret: 'secret'
+              }
+            };
+
+            request.headers = {
+              'content-type': 'application/json'
+            };
+            
+            var results = myOperation.validateRequest(request);
+  
+            assert.equal(results.warnings.length, 0);
+            assert.equal(results.errors.length, 0);
+          });
+
+        it('should return a errors for readOnly property "age": 12, cannot be sent in the request.', function () {
+          var myOperation = swaggerApi.getOperation('/toy', 'post');
+
+          var request = {
+            url: '/toy',
+            body: {
+              name: 'Test toy',
+              photoUrls: [],
+              age: 12,
+            }
+          };
+
+          request.headers = {
+            'content-type': 'application/json'
+          };
+          
+          var results = myOperation.validateRequest(request);
+
+          assert.equal(results.warnings.length, 0);
+          assert.deepEqual(results.errors[0].errors[0],
+            {
+              code: 'READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST',
+              params: ["", "12"],
+              message: 'ReadOnly property `\"\": 12`, cannot be sent in the request.',
+              path: ["age"],
+            });
         });
+
+        it('should return a errors for expected type number but found type not-a-number', function () {
+          var myOperation = swaggerApi.getOperation('/toy', 'post');
+
+          var request = {
+            url: '/toy',
+            body: {
+              name: 'Test toy',
+              photoUrls: [],
+              age: NaN,
+            }
+          };
+
+          request.headers = {
+            'content-type': 'application/json'
+          };
+          
+          var results = myOperation.validateRequest(request);
+
+          assert.equal(results.warnings.length, 0);
+          assert.deepEqual(results.errors[0].errors[0],
+            {
+              code: 'INVALID_TYPE',
+              params: ["number", "not-a-number"],
+              message: 'Expected type number but found type not-a-number',
+              path: ["age"],
+            });
+        });
+
+        it('should return a errors for readOnly property "toy": "price", cannot be sent in the request.', function () {
+          var myOperation = swaggerApi.getOperation('/toy', 'post');
+
+          var request = {
+            url: '/toy',
+            body: {
+              name: 'Test toy',
+              photoUrls: [],
+              price: 'price',
+            }
+          };
+
+          request.headers = {
+            'content-type': 'application/json'
+          };
+          
+          var results = myOperation.validateRequest(request);
+
+          assert.equal(results.warnings.length, 0);
+          assert.deepEqual(results.errors[0].errors[0],
+            {
+              code: 'READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST',
+              params: ["toy","price"],
+              message: 'ReadOnly property `\"toy\": \"price\"`, cannot be sent in the request.',
+              path: ["price"],
+              title: "{\"path\":[\"toy\"]}"
+            });
+        });
+      });
 
         // We only need one test to make sure that we're using the global consumes
 
