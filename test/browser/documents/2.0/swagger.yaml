@@ -836,10 +836,10 @@ definitions:
         - "sold"
       secret:
         type: "string"
-        x-ms-secret: "true"
+        x-ms-secret: true
       nonSecret:
         type: "string"
-        x-ms-secret: "false"
+        x-ms-secret: false
       writeOnly:
         type: "string"
         x-ms-mutability: ["create", "update"]
@@ -868,7 +868,7 @@ definitions:
       name:
         type: "string"
         example: "doggie"
-        x-ms-secret: "true"
+        x-ms-secret: true
       age:
         readOnly: true
         type: "number"
@@ -885,7 +885,7 @@ definitions:
           wrapped: true
         items:
           type: "string"
-        x-ms-secret: "true"
+        x-ms-secret: true
       tags:
         type: "array"
         xml:
@@ -903,10 +903,10 @@ definitions:
       secret:
         type: "string"
         title: "{\"path\":[\"toy\"]}"
-        x-ms-secret: "true"
+        x-ms-secret: true
       nonSecret:
         type: "string"
-        x-ms-secret: "false"
+        x-ms-secret: false
       writeOnly:
         type: "string"
         x-ms-mutability: ["create", "update"]
