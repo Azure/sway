@@ -349,14 +349,14 @@ describe('Response', function () {
                 title: '{\"path\":[\"toy\"]}'
               }, {
                 code: 'SECRET_PROPERTY',
-                message: 'Secret property `"toy": `, cannot be sent in the response.',
-                params: ['toy', []],
+                message: 'Secret property `"toy"`, cannot be sent in the response.',
+                params: ['toy', ''],
                 path: ['photoUrls'],
                 title: '{\"path\":[\"toy\"]}'
               }, {
                 code: 'SECRET_PROPERTY',
-                message: 'Secret property `"": "Test Toy"`, cannot be sent in the response.',
-                params: ['', 'Test Toy'],
+                message: 'Secret property `""`, cannot be sent in the response.',
+                params: ['', ''],
                 path: ['name'],
               },
             ]);
@@ -731,12 +731,12 @@ describe('Response', function () {
                   errors: [
                     {
                       code: 'SECRET_PROPERTY',
-                      message: 'Secret property `"": "password"`, cannot be sent in the response.',
-                      params: ['', 'password'],
+                      message: 'Secret property `""`, cannot be sent in the response.',
+                      params: ['', ''],
                       path: ['secret']
                     }
                   ],
-                  message: 'Invalid body: Secret property `"": "password"`, cannot be sent in the response.',
+                  message: 'Invalid body: Secret property `""`, cannot be sent in the response.',
                   path: []
                 }
               ]);

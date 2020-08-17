@@ -1,6 +1,6 @@
 {
   "name": "yasway",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "description": "A library that simplifies Swagger integrations.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -76,7 +76,7 @@
     "js-yaml": "^3.13.1",
     "json-refs": "^3.0.13",
     "json-schema-faker": "^0.5.0-rc16",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.20",
     "native-promise-only": "^0.8.1",
     "nyc": "^15.0.1",
     "path-to-regexp": "^1.7.0",
