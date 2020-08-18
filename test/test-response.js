@@ -343,8 +343,8 @@ describe('Response', function () {
             assert.deepEqual(results.errors[0].errors, [
               {
                 code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
-                message: 'Write-only property `"toy": `, is not allowed in the response.',
-                params: ['toy', []],
+                message: 'Write-only property `"toy"`, is not allowed in the response.',
+                params: ['toy', ''],
                 path: ['photoUrls'],
                 title: '{\"path\":[\"toy\"]}'
               }, {
@@ -791,12 +791,12 @@ describe('Response', function () {
                   errors: [
                     {
                       code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
-                      message: 'Write-only property `"": "writeonly"`, is not allowed in the response.',
-                      params: ['', 'writeonly'],
+                      message: 'Write-only property `""`, is not allowed in the response.',
+                      params: ['', ''],
                       path: ['writeOnly']
                     }
                   ],
-                  message: 'Invalid body: Write-only property `"": "writeonly"`, is not allowed in the response.',
+                  message: 'Invalid body: Write-only property `""`, is not allowed in the response.',
                   path: []
                 }
               ]);
@@ -827,12 +827,12 @@ describe('Response', function () {
                   errors: [
                     {
                       code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
-                      message: 'Write-only property `"": "createonly"`, is not allowed in the response.',
-                      params: ['', 'createonly'],
+                      message: 'Write-only property `""`, is not allowed in the response.',
+                      params: ['', ''],
                       path: ['createOnly']
                     }
                   ],
-                  message: 'Invalid body: Write-only property `"": "createonly"`, is not allowed in the response.',
+                  message: 'Invalid body: Write-only property `""`, is not allowed in the response.',
                   path: []
                 }
               ]);
@@ -863,12 +863,12 @@ describe('Response', function () {
                   errors: [
                     {
                       code: 'WRITEONLY_PROPERTY_NOT_ALLOWED_IN_RESPONSE',
-                      message: 'Write-only property `"": "updateonly"`, is not allowed in the response.',
-                      params: ['', 'updateonly'],
+                      message: 'Write-only property `""`, is not allowed in the response.',
+                      params: ['', ''],
                       path: ['updateOnly']
                     }
                   ],
-                  message: 'Invalid body: Write-only property `"": "updateonly"`, is not allowed in the response.',
+                  message: 'Invalid body: Write-only property `""`, is not allowed in the response.',
                   path: []
                 }
               ]);
