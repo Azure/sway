@@ -1558,6 +1558,13 @@ describe('Parameter', function () {
         assert.ok(error.failedValidation);
       });
 
+      it('non required value for patch', function () {
+        var paramValue = swaggerApi.getOperation('/pet', 'patch').getParameter('body').getValue({body: {}});
+
+        assert.ok(paramValue.valid);
+        assert.ok(_.isUndefined(paramValue.error));
+      });
+
       describe('provided empty value', function () {
         describe('integer', function () {
           it('allowEmptyValue false', function (done) {
